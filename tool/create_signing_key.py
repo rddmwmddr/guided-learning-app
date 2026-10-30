@@ -26,7 +26,7 @@ subprocess.run([keytool, '-genkeypair', '-keystore', str(key), '-storetype', 'PK
     '-keypass:env', 'MANMANXIANG_KEY_PASSWORD', '-keyalg', 'RSA', '-keysize', '4096',
     '-validity', '10000', '-dname', 'CN=Manmanxiang Open Source Release', '-noprompt'],
     env=env, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-properties.write_text('storeFile=' + str(key) + '\nstorePassword=' + password + '\nkeyAlias=manmanxiang-release\nkeyPassword=' + password + '\n')
+properties.write_text('storeFile=../.release/release.jks\nstorePassword=' + password + '\nkeyAlias=manmanxiang-release\nkeyPassword=' + password + '\n')
 key.chmod(0o600)
 properties.chmod(0o600)
 print('Created local release signing files. Back up .release/ AND android/key.properties privately.')

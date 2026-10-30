@@ -10,7 +10,7 @@ plugins {
 val releaseProperties = Properties()
 val releasePropertiesFile = rootProject.file("key.properties")
 if (releasePropertiesFile.exists()) {
-    releasePropertiesFile.inputStream().use { releaseProperties.load(it) }
+    releasePropertiesFile.reader(Charsets.UTF_8).use { releaseProperties.load(it) }
 }
 
 android {
@@ -41,7 +41,7 @@ android {
     signingConfigs {
         if (releasePropertiesFile.exists()) {
             create("release") {
-                storeFile = file(releaseProperties.getProperty("storeFile"))
+                storeFile = rootProject.file(releaseProperties.getProperty("storeFile"))
                 storePassword = releaseProperties.getProperty("storePassword")
                 keyAlias = releaseProperties.getProperty("keyAlias")
                 keyPassword = releaseProperties.getProperty("keyPassword")
